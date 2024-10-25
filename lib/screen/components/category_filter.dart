@@ -30,7 +30,7 @@ class CategoryFilter extends StatelessWidget {
                   color: category.isSelected ? Colors.cyan : Colors.grey[200],
                   borderRadius: BorderRadius.circular(25),
                   boxShadow: category.isSelected
-                      ? [
+                      ? const [
                           BoxShadow(
                             color: Colors.black12,
                             blurRadius: 6,

@@ -104,18 +104,11 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        child: Container(
-          height: 1400,
-          child: const Center(
-            child: Column(
-              children: const [
-                CategoryFilter(),
-                Expanded(
-                    child:
-                        FilteredContent()), // Filtered content below categories
-              ],
-            ),
-          ),
+        child: Column(
+          children: [
+            CategoryFilter(),
+            FilteredContent(), // Filtered content below categories
+          ],
         ),
       ),
     );
