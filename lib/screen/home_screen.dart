@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => DetailScreen()),
+              MaterialPageRoute(builder: (context) => const DetailScreen()),
             );
           },
         ),
@@ -104,12 +104,124 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Column(
           children: [
-            CategoryFilter(),
-            FilteredContent(), // Filtered content below categories
+            const CategoryFilter(),
+            const FilteredContent(), // Filtered content below categories
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Authors to follow',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text('Show all'),
+                    ),
+                  ],
+                ),
+                const SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      _AuthorChip(
+                        name: 'Philip K. Dick',
+                        books: '44 books',
+                        imageUrl:
+                            'https://avatar.iran.liara.run/username?username=naeim+poli',
+                      ),
+                      SizedBox(width: 8),
+                      _AuthorChip(
+                        name: 'Ray Bradbury',
+                        books: '38 books',
+                        imageUrl: 'https://avatar.iran.liara.run/public',
+                      ),
+                      SizedBox(width: 8),
+                      _AuthorChip(
+                        name: 'Escanor',
+                        books: '38 books',
+                        imageUrl:
+                            'https://avatar.iran.liara.run/public/job/designer/male',
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _AuthorChip extends StatelessWidget {
+  final String name;
+  final String books;
+  final String imageUrl;
+
+  const _AuthorChip({
+    required this.name,
+    required this.books,
+    required this.imageUrl,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 120,
+      width: 200,
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 30,
+            backgroundImage: NetworkImage(imageUrl),
+          ),
+          const SizedBox(width: 24),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                name,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              Row(
+                children: [
+                  const Icon(Icons.book, size: 17),
+                  const SizedBox(width: 3),
+                  Text(
+                    books,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Colors.grey,
+                        ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

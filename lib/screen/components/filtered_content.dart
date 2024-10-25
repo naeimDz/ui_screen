@@ -13,7 +13,7 @@ class FilteredContent extends StatelessWidget {
         MediaQuery.of(context).size.height * 0.45; //Dynamic height ratio
     double cardWidth = screenWidth * 0.55; // Card takes ~35% of screen width
     double cardHeight =
-        sectionHeight * .67; // Golden ratio for book covers (3:2)
+        sectionHeight * .75; // Golden ratio for book covers (3:2)
     final selectedCategory =
         Provider.of<CategoryProvider>(context).getSelectedCategory();
 
@@ -22,52 +22,72 @@ class FilteredContent extends StatelessWidget {
       {
         "anime_name": "Attack on Titan",
         "character_name": "Eren Jaeger",
-        "category": "Shounen"
+        "category": "Shounen",
+        "image":
+            "https://ia800607.us.archive.org/view_archive.php?archive=/22/items/olcovers24/olcovers24-L.zip&file=240727-L.jpg"
       },
       {
         "anime_name": "Demon Slayer: Kimetsu no Yaiba",
         "character_name": "Tanjiro Kamado",
-        "category": "Shounen"
+        "category": "Shounen",
+        "image":
+            "https://ia800607.us.archive.org/view_archive.php?archive=/22/items/olcovers24/olcovers24-L.zip&file=240939-L.jpg"
       },
       {
         "anime_name": "My Hero Academia",
         "character_name": "Izuku Midoriya",
-        "category": "Shounen"
+        "category": "Shounen",
+        "image":
+            "https://ia800607.us.archive.org/view_archive.php?archive=/22/items/olcovers24/olcovers24-L.zip&file=240721-L.jpg"
       },
       {
         "anime_name": "Naruto",
         "character_name": "Naruto Uzumaki",
-        "category": "Shounen"
+        "category": "Shounen",
+        "image":
+            "https://ia800607.us.archive.org/view_archive.php?archive=/22/items/olcovers24/olcovers24-L.zip&file=240007-L.jpg"
       },
       {
         "anime_name": "One Piece",
         "character_name": "Monkey D. Luffy",
-        "category": "Shounen"
+        "category": "Shounen",
+        "image":
+            "https://ia800607.us.archive.org/view_archive.php?archive=/22/items/olcovers24/olcovers24-L.zip&file=240841-L.jpg"
       },
       {
         "anime_name": "Fullmetal Alchemist: Brotherhood",
         "character_name": "Edward Elric",
-        "category": "Seinen"
+        "category": "Seinen",
+        "image":
+            "https://ia800607.us.archive.org/view_archive.php?archive=/22/items/olcovers24/olcovers24-L.zip&file=240123-L.jpg"
       },
       {
         "anime_name": "Death Note",
         "character_name": "Light Yagami",
-        "category": "Psychological Thriller"
+        "category": "Psychological Thriller",
+        "image":
+            "https://ia800607.us.archive.org/view_archive.php?archive=/22/items/olcovers24/olcovers24-L.zip&file=240222-L.jpg"
       },
       {
         "anime_name": "Cowboy Bebop",
         "character_name": "Spike Spiegel",
-        "category": "Space Western"
+        "category": "Space Western",
+        "image":
+            "https://ia800607.us.archive.org/view_archive.php?archive=/22/items/olcovers24/olcovers24-L.zip&file=240707-L.jpg"
       },
       {
         "anime_name": "Neon Genesis Evangelion",
         "character_name": "Shinji Ikari",
-        "category": "Mecha Psychological"
+        "category": "Mecha Psychological",
+        "image":
+            "https://ia800607.us.archive.org/view_archive.php?archive=/22/items/olcovers24/olcovers24-L.zip&file=240717-L.jpg"
       },
       {
         "anime_name": "Your Name.",
         "character_name": "Taki Tachibana",
-        "category": "Romance Fantasy"
+        "category": "Romance Fantasy",
+        "image":
+            "https://ia800607.us.archive.org/view_archive.php?archive=/22/items/olcovers24/olcovers24-L.zip&file=240017-L.jpg"
       }
     ];
 
@@ -77,10 +97,11 @@ class FilteredContent extends StatelessWidget {
           item["category"].contains(selectedCategory);
     }).toList();
 
-    return SizedBox(
+    return Container(
       height: sectionHeight,
+      //color: Colors.black,
       child: ListView.builder(
-        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
+        //padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
         scrollDirection: Axis.horizontal,
         itemCount: filteredItems.length,
         itemBuilder: (context, index) {
@@ -95,8 +116,8 @@ class FilteredContent extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     image: DecorationImage(
-                      image: NetworkImage(
-                          "https://picsum.photos/id/$index/200/300?blur"),
+                      image: NetworkImage(filteredItems[index]['image']),
+                      //"https://picsum.photos/id/$index/200/300?blur"),
                       fit: BoxFit.cover,
                     ),
                     boxShadow: [
