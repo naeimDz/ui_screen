@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_starter_template/core/app_theme.dart';
 import 'package:flutter_starter_template/core/routes/routes.dart';
+import 'package:flutter_starter_template/providers/category_provider.dart';
 import 'package:flutter_starter_template/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,8 +27,9 @@ void main() async {
         providers: [
           Provider<SharedPreferences>.value(value: prefs),
           ChangeNotifierProvider<ThemeProvider>(
-            create: (context) => ThemeProvider(prefs: prefs),
-          ),
+              create: (context) => ThemeProvider(prefs: prefs)),
+          ChangeNotifierProvider<CategoryProvider>(
+              create: (context) => CategoryProvider()),
           // Add your global providers here
         ],
         child: const MyApp(),
