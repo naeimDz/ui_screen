@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_starter_template/providers/theme_provider.dart';
 import 'package:flutter_starter_template/screen/components/category_filter.dart';
 import 'package:flutter_starter_template/screen/components/filtered_content.dart';
-import 'package:flutter_starter_template/screen/detail_screen.dart';
+import 'package:flutter_starter_template/shared/widgets/custom_bottom_navigation_bar.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -15,15 +15,12 @@ class HomeScreen extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Scaffold(
+      backgroundColor: Color(0xFFF8F8F8),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.sort),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const DetailScreen()),
-            );
-          },
+          onPressed: () {},
         ),
         bottom: PreferredSize(
           preferredSize:
@@ -160,6 +157,29 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+List<Widget> buildNavigationItems() {
+  List<Widget> list = [];
+  for (var navigationItem in ["item1", "item2", "item3"]) {
+    list.add(buildNavigationItem(navigationItem));
+  }
+  return list;
+}
+
+Widget buildNavigationItem(String item) {
+  return GestureDetector(
+    child: Container(
+      width: 50,
+      child: Center(
+        child: Icon(
+          Icons.abc,
+          color: Colors.grey[400],
+          size: 28,
+        ),
+      ),
+    ),
+  );
 }
 
 class _AuthorChip extends StatelessWidget {

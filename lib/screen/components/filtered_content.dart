@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_starter_template/providers/category_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../detail_screen.dart';
+
 class FilteredContent extends StatelessWidget {
   const FilteredContent({super.key});
 
@@ -97,7 +99,7 @@ class FilteredContent extends StatelessWidget {
           item["category"].contains(selectedCategory);
     }).toList();
 
-    return Container(
+    return SizedBox(
       height: sectionHeight,
       //color: Colors.black,
       child: ListView.builder(
@@ -107,49 +109,60 @@ class FilteredContent extends StatelessWidget {
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.all(12.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: cardWidth,
-                  height: cardHeight, // 4:3 aspect ratio
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    image: DecorationImage(
-                      image: NetworkImage(filteredItems[index]['image']),
-                      //"https://picsum.photos/id/$index/200/300?blur"),
-                      fit: BoxFit.cover,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 8,
-                        offset: const Offset(0, 4),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BookDetailScreen(
+                            item: filteredItems[index],
+                          )),
+                );
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: cardWidth,
+                    height: cardHeight, // 4:3 aspect ratio
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      image: DecorationImage(
+                        image: NetworkImage(filteredItems[index]['image']),
+                        //"https://picsum.photos/id/$index/200/300?blur"),
+                        fit: BoxFit.cover,
                       ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 8),
-                SizedBox(
-                  width: cardWidth,
-                  child: Text(
-                    filteredItems[index]["anime_name"],
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          fontSize: cardWidth * 0.09, // Responsive font size
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
                         ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                      ],
+                    ),
                   ),
-                ),
-                Text(
-                  filteredItems[index]["character_name"],
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.grey,
-                        fontSize: cardWidth * 0.07, // Responsive font size
-                      ),
-                ),
-              ],
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    width: cardWidth,
+                    child: Text(
+                      filteredItems[index]["anime_name"],
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontSize: cardWidth * 0.09, // Responsive font size
+                          ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Text(
+                    filteredItems[index]["character_name"],
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Colors.grey,
+                          fontSize: cardWidth * 0.07, // Responsive font size
+                        ),
+                  ),
+                ],
+              ),
             ),
           );
         },

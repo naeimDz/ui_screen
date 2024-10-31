@@ -25,7 +25,8 @@ class CategoryFilter extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               margin: const EdgeInsets.symmetric(horizontal: 8.0),
               decoration: BoxDecoration(
-                color: category.isSelected ? Colors.cyan : Colors.grey[200],
+                color:
+                    category.isSelected ? Color(0xFF4A90E2) : Color(0xFFF0E8FF),
                 borderRadius: BorderRadius.circular(25),
                 boxShadow: category.isSelected
                     ? const [
